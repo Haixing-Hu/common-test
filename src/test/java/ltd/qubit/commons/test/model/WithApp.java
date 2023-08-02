@@ -1,0 +1,22 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//    Copyright (c) 2022 - 2023.
+//    Haixing Hu, Qubit Co. Ltd.
+//
+//    All rights reserved.
+//
+////////////////////////////////////////////////////////////////////////////////
+package ltd.qubit.commons.test.model;
+
+/**
+ * 此接口表示实体类具有所属App属性。
+ *
+ * @author 胡海星
+ */
+public interface WithApp {
+
+  Info getApp();
+
+  void setApp(Info app);
+
+}

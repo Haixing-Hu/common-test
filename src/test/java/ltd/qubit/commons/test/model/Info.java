@@ -18,7 +18,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ltd.qubit.commons.annotation.Identifier;
 import ltd.qubit.commons.lang.Assignable;
@@ -26,6 +28,7 @@ import ltd.qubit.commons.lang.Equality;
 import ltd.qubit.commons.lang.Hash;
 import ltd.qubit.commons.lang.StringUtils;
 import ltd.qubit.commons.text.tostring.ToStringBuilder;
+import ltd.qubit.commons.text.xml.jaxb.IsoInstantXmlAdapter;
 import ltd.qubit.commons.util.pair.KeyValuePair;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -54,12 +57,14 @@ public class Info implements Identifiable, WithCode, WithName, Deletable,
   /**
    * 唯一标识。
    */
+  @XmlElement(name = "id")
   @Identifier
   protected Long id;
 
   /**
    * 编码。
    */
+  @XmlElement(name = "code")
   @Size(min = 1, max = 64)
   @NotBlank
   protected String code;
@@ -67,6 +72,7 @@ public class Info implements Identifiable, WithCode, WithName, Deletable,
   /**
    * 名称。
    */
+  @XmlElement(name = "name")
   @Size(min = 1, max = 128)
   @NotBlank
   protected String name;
@@ -74,6 +80,8 @@ public class Info implements Identifiable, WithCode, WithName, Deletable,
   /**
    * 标记删除时间。
    */
+  @XmlElement(name = "delete-time")
+  @XmlJavaTypeAdapter(IsoInstantXmlAdapter.class)
   @Nullable
   protected Instant deleteTime;
 

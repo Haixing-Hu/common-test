@@ -10,6 +10,7 @@ package ltd.qubit.commons.test.model;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import ltd.qubit.commons.lang.Equality;
@@ -31,6 +32,7 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ObjectWithEnumField {
 
+  @XmlElement(name = "enum-field")
   private EnumWithField enumField;
 
   public final EnumWithField getEnumField() {

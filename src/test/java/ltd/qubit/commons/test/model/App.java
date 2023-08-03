@@ -16,7 +16,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ltd.qubit.commons.annotation.Identifier;
 import ltd.qubit.commons.annotation.Unique;
@@ -26,6 +28,7 @@ import ltd.qubit.commons.lang.Assignment;
 import ltd.qubit.commons.lang.Equality;
 import ltd.qubit.commons.lang.Hash;
 import ltd.qubit.commons.text.tostring.ToStringBuilder;
+import ltd.qubit.commons.text.xml.jaxb.IsoInstantXmlAdapter;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -54,15 +57,18 @@ public class App implements Identifiable, WithInfo, Stateful, Auditable,
    */
   public static final String SYSTEM_APP_CODE = "system";
   private static final long serialVersionUID = -4130818293179381259L;
+
   /**
    * 唯一标识，系统自动生成。
    */
+  @XmlElement(name = "id")
   @Identifier
   private Long id;
 
   /**
    * 代码，全局不可重复，一旦设置不能更改。
    */
+  @XmlElement(name = "code")
   @Unique
   @Size(min = 1, max = 64)
   private String code;
@@ -70,24 +76,28 @@ public class App implements Identifiable, WithInfo, Stateful, Auditable,
   /**
    * 名称，同一机构下不可重复。
    */
+  @XmlElement(name = "name")
   @Size(min = 1, max = 256)
   private String name;
 
   /**
    * 所属类别基本信息。
    */
+  @XmlElement(name = "category")
   @Nullable
   private Info category;
 
   /**
    * 状态。
    */
+  @XmlElement(name = "state")
   @NotNull
   private State state;
 
   /**
    * 图标。
    */
+  @XmlElement(name = "icon")
   @Nullable
   @Size(max = 512)
   private String icon;
@@ -95,6 +105,7 @@ public class App implements Identifiable, WithInfo, Stateful, Auditable,
   /**
    * 网址 URL。
    */
+  @XmlElement(name = "url")
   @Nullable
   @Size(max = 512)
   private String url;
@@ -102,24 +113,28 @@ public class App implements Identifiable, WithInfo, Stateful, Auditable,
   /**
    * 描述。
    */
+  @XmlElement(name = "description")
   @Nullable
   private String description;
 
   /**
    * 备注。
    */
+  @XmlElement(name = "comment")
   @Nullable
   private String comment;
 
   /**
    * 安全秘钥，从数据库中读取出来的是秘钥加盐后的哈希值。
    */
+  @XmlElement(name = "security-key")
   @Size(min = 1, max = 4096)
   private String securityKey;
 
   /**
    * 访问令牌。
    */
+  @XmlElement(name = "token")
   @Nullable
   @Size(min = 1, max = 128)
   private String token;
@@ -127,34 +142,45 @@ public class App implements Identifiable, WithInfo, Stateful, Auditable,
   /**
    * 访问令牌创建时间。
    */
+  @XmlElement(name = "token-create-time")
+  @XmlJavaTypeAdapter(IsoInstantXmlAdapter.class)
   @Nullable
   private Instant tokenCreateTime;
 
   /**
    * 访问令牌过期时间。
    */
+  @XmlElement(name = "token-expired-time")
+  @XmlJavaTypeAdapter(IsoInstantXmlAdapter.class)
   @Nullable
   private Instant tokenExpiredTime;
 
   /**
    * 是否是预定义的数据。
    */
+  @XmlElement(name = "predefined")
   private boolean predefined;
 
   /**
    * 创建时间。
    */
+  @XmlElement(name = "create-time")
+  @XmlJavaTypeAdapter(IsoInstantXmlAdapter.class)
   private Instant createTime;
 
   /**
    * 最后一次修改时间。
    */
+  @XmlElement(name = "modify-time")
+  @XmlJavaTypeAdapter(IsoInstantXmlAdapter.class)
   @Nullable
   private Instant modifyTime;
 
   /**
    * 删除时间。
    */
+  @XmlElement(name = "delete-time")
+  @XmlJavaTypeAdapter(IsoInstantXmlAdapter.class)
   @Nullable
   private Instant deleteTime;
 

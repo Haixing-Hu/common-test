@@ -15,6 +15,7 @@ import javax.annotation.Nullable;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import ltd.qubit.commons.annotation.Computed;
@@ -74,6 +75,7 @@ public class Location implements Serializable, Normalizable,
   /**
    * 纬度，采用小数形式表示，保留小数点后面5位。
    */
+  @XmlElement(name = "latitude")
   @JsonSerialize(using = LocationCoordinateSerializer.class)
   @JsonDeserialize(using = LocationCoordinateDeserializer.class)
   @Scale(value = LocationCoordinateCodec.SCALE)
@@ -82,6 +84,7 @@ public class Location implements Serializable, Normalizable,
   /**
    * 经度，采用小数形式表示，保留小数点后面5位。
    */
+  @XmlElement(name = "longitude")
   @JsonSerialize(using = LocationCoordinateSerializer.class)
   @JsonDeserialize(using = LocationCoordinateDeserializer.class)
   @Scale(value = LocationCoordinateCodec.SCALE)
@@ -90,6 +93,7 @@ public class Location implements Serializable, Normalizable,
   /**
    * 高度，采用小数形式表示，保留小数点后面5位。
    */
+  @XmlElement(name = "altitude")
   @JsonSerialize(using = LocationCoordinateSerializer.class)
   @JsonDeserialize(using = LocationCoordinateDeserializer.class)
   @Scale(value = LocationCoordinateCodec.SCALE)

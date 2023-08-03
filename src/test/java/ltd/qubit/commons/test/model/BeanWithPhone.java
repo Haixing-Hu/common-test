@@ -14,6 +14,7 @@ import javax.annotation.Nullable;
 
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import ltd.qubit.commons.lang.Equality;
@@ -37,6 +38,7 @@ public class BeanWithPhone {
   /**
    * 手机号码。
    */
+  @XmlElement(name = "mobile")
   @Nullable
   private Phone mobile;
 

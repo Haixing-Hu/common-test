@@ -10,17 +10,18 @@ package ltd.qubit.commons.test.model;
 
 import java.time.Instant;
 
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ltd.qubit.commons.annotation.Unique;
 import ltd.qubit.commons.lang.Equality;
 import ltd.qubit.commons.lang.Hash;
 import ltd.qubit.commons.text.tostring.ToStringBuilder;
+import ltd.qubit.commons.text.xml.jaxb.IsoInstantXmlAdapter;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -38,12 +39,11 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BadBean {
 
-
   /**
    * 唯一标识，系统自动生成。
    */
   @Unique
-  @NotNull
+  @XmlElement(name = "id")
   private Long id;
 
   /**
@@ -51,12 +51,14 @@ public class BadBean {
    */
   @Unique
   @Size(min = 1, max = 64)
+  @XmlElement(name = "code")
   private String code;
 
   /**
    * 名称，同一机构下不可重复。
    */
   @Size(min = 1, max = 256)
+  @XmlElement(name = "name")
   private String name;
 
   /**
@@ -66,6 +68,7 @@ public class BadBean {
    */
   @JsonProperty("createTime")
   @XmlElement(name = "createTime")
+  @XmlJavaTypeAdapter(IsoInstantXmlAdapter.class)
   private Instant createTime;
 
   public final Long getId() {

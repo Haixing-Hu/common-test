@@ -15,6 +15,7 @@ import javax.annotation.Nullable;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import ltd.qubit.commons.annotation.Computed;
@@ -76,6 +77,7 @@ public class Phone implements Serializable, Assignable<Phone> {
   /**
    * 国家区号。
    */
+  @XmlElement(name = "country-area")
   @Size(min = 1, max = 16)
   @Nullable
   private String countryArea;
@@ -83,6 +85,7 @@ public class Phone implements Serializable, Assignable<Phone> {
   /**
    * 城市区号。
    */
+  @XmlElement(name = "city-area")
   @Size(min = 1, max = 16)
   @Nullable
   private String cityArea;
@@ -90,6 +93,7 @@ public class Phone implements Serializable, Assignable<Phone> {
   /**
    * 电话号码。
    */
+  @XmlElement(name = "number")
   @Size(min = 1, max = 64)
   private String number;
 

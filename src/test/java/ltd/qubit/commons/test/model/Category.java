@@ -16,7 +16,9 @@ import javax.annotation.Nullable;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import ltd.qubit.commons.annotation.Identifier;
 import ltd.qubit.commons.annotation.Precision;
@@ -28,6 +30,7 @@ import ltd.qubit.commons.lang.Assignment;
 import ltd.qubit.commons.lang.Equality;
 import ltd.qubit.commons.lang.Hash;
 import ltd.qubit.commons.text.tostring.ToStringBuilder;
+import ltd.qubit.commons.text.xml.jaxb.IsoInstantXmlAdapter;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -57,9 +60,11 @@ public class Category implements Identifiable, WithInfo, WithEntity, Auditable,
    */
   public static final String TITLE_JOINER = " - ";
   private static final long serialVersionUID = 8069770708740141238L;
+
   /**
    * 唯一标识，系统自动生成。
    */
+  @XmlElement(name = "id")
   @JsonProperty("id")
   @Identifier
   private Long id;
@@ -67,12 +72,14 @@ public class Category implements Identifiable, WithInfo, WithEntity, Auditable,
   /**
    * 该类别所属实体。
    */
+  @XmlElement(name = "entity")
   @JsonProperty("entity")
   private String entity;
 
   /**
    * 编码，全局不可重复。
    */
+  @XmlElement(name = "code")
   @JsonProperty("code")
   @Size(min = 1, max = 64)
   @Unique
@@ -81,6 +88,7 @@ public class Category implements Identifiable, WithInfo, WithEntity, Auditable,
   /**
    * 名称，同一实体下类别名称不可重复。
    */
+  @XmlElement(name = "name")
   @JsonProperty("name")
   @Size(min = 1, max = 128)
   @Unique(respectTo = "entity")
@@ -89,6 +97,7 @@ public class Category implements Identifiable, WithInfo, WithEntity, Auditable,
   /**
    * 图标。
    */
+  @XmlElement(name = "icon")
   @JsonProperty("icon")
   @Size(min = 1, max = 512)
   @Nullable
@@ -97,6 +106,7 @@ public class Category implements Identifiable, WithInfo, WithEntity, Auditable,
   /**
    * 描述。
    */
+  @XmlElement(name = "description")
   @JsonProperty("description")
   @Nullable
   private String description;
@@ -115,6 +125,7 @@ public class Category implements Identifiable, WithInfo, WithEntity, Auditable,
    *
    * <p>此字段通过查询构造生成
    */
+  @XmlElement(name = "title")
   @JsonProperty("title")
   @Size(min = 1, max = 4096)
   @Nullable
@@ -125,6 +136,7 @@ public class Category implements Identifiable, WithInfo, WithEntity, Auditable,
    *
    * <p>父类别必须与子类别属于同一个App同一个实体；若不存在父类别则此属性为{@code null}。
    */
+  @XmlElement(name = "parent")
   @JsonProperty("parent")
   @Reference(entity = Category.class, property = "info")
   @Nullable
@@ -133,12 +145,15 @@ public class Category implements Identifiable, WithInfo, WithEntity, Auditable,
   /**
    * 是否是预定义的数据。
    */
+  @XmlElement(name = "predefined")
   @JsonProperty("predefined")
   private boolean predefined;
 
   /**
    * 创建时间。
    */
+  @XmlElement(name = "create-time")
+  @XmlJavaTypeAdapter(IsoInstantXmlAdapter.class)
   @JsonProperty("create_time")
   @Precision(TimeUnit.SECONDS)
   private Instant createTime;
@@ -146,6 +161,8 @@ public class Category implements Identifiable, WithInfo, WithEntity, Auditable,
   /**
    * 最后一次修改时间。
    */
+  @XmlElement(name = "modify-time")
+  @XmlJavaTypeAdapter(IsoInstantXmlAdapter.class)
   @JsonProperty("modify_time")
   @Precision(TimeUnit.SECONDS)
   @Nullable
@@ -154,6 +171,8 @@ public class Category implements Identifiable, WithInfo, WithEntity, Auditable,
   /**
    * 删除时间。
    */
+  @XmlElement(name = "delete-time")
+  @XmlJavaTypeAdapter(IsoInstantXmlAdapter.class)
   @JsonProperty("delete_time")
   @Precision(TimeUnit.SECONDS)
   @Nullable

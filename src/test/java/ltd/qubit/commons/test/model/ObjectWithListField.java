@@ -13,6 +13,8 @@ import java.util.List;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import ltd.qubit.commons.lang.Equality;
@@ -34,6 +36,8 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ObjectWithListField {
 
+  @XmlElementWrapper(name = "values")
+  @XmlElement(name="value")
   @Size(max = 10)
   private List<String> values;
 

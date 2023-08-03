@@ -11,6 +11,8 @@ package ltd.qubit.commons.test.model;
 import jakarta.validation.constraints.Size;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 import ltd.qubit.commons.lang.Equality;
@@ -32,30 +34,47 @@ import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ObjectWithArrayField {
 
+  @XmlElementWrapper(name = "string-array")
+  @XmlElement(name="data")
   @Size(min = 1, max = 10)
   private String[] stringArray;
 
+  @XmlElementWrapper(name = "boolean-array")
+  @XmlElement(name="data")
   @Size(min = 1, max = 5)
   private boolean[] booleanArray;
 
+  @XmlElementWrapper(name = "char-array")
+  @XmlElement(name="data")
   @Size(min = 1, max = 5)
   private char[] charArray;
 
+  @XmlElement(name = "byte-array")
   @Size(min = 1, max = 5)
   private byte[] byteArray;
 
+  @XmlElementWrapper(name = "short-array")
+  @XmlElement(name="data")
   @Size(min = 1, max = 5)
   private short[] shortArray;
 
+  @XmlElementWrapper(name = "int-array")
+  @XmlElement(name="data")
   @Size(min = 1, max = 5)
   private int[] intArray;
 
+  @XmlElementWrapper(name = "long-array")
+  @XmlElement(name="data")
   @Size(min = 1, max = 5)
   private long[] longArray;
 
+  @XmlElementWrapper(name = "float-array")
+  @XmlElement(name="data")
   @Size(min = 1, max = 5)
   private float[] floatArray;
 
+  @XmlElementWrapper(name = "double-array")
+  @XmlElement(name="data")
   @Size(min = 1, max = 5)
   private double[] doubleArray;
 

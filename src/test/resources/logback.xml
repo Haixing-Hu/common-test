@@ -16,8 +16,8 @@
   </appender>
   <!-- Control the log level -->
   <logger level="INFO" name="ltd.qubit.commons.util.codec"/>
-  <logger level="DEBUG" name="ltd.qubit.commons.test"/>
-  <logger level="DEBUG" name="ltd.qubit.commons.test.dao"/>
+  <logger level="INFO" name="ltd.qubit.commons.test"/>
+  <logger level="INFO" name="ltd.qubit.commons.test.dao"/>
   <root level="INFO">
     <appender-ref ref="STDOUT" />
   </root>

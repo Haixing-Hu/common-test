@@ -45,6 +45,11 @@
       <artifactId>jgrapht-core</artifactId>
       <scope>compile</scope>
     </dependency>
+    <dependency>
+      <groupId>net.jodah</groupId>
+      <artifactId>typetools</artifactId>
+      <scope>runtime</scope>
+    </dependency>
 
     <!-- Unit test -->
     <dependency>
